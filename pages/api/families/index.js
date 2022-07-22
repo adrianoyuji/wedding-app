@@ -1,6 +1,7 @@
 import Family from "../../../models/Family";
 import { connectToDatabase } from "../../../utils/mongodb";
 import createFamilySchema from "../../../schemas/FamilySchema";
+import { validateToken } from "../../../utils/jwt";
 
 const handler = async (request, response) => {
   const { method } = request;
@@ -10,6 +11,7 @@ const handler = async (request, response) => {
         await getFamily(response);
         break;
       case "POST":
+        await validateToken(request);
         await createFamily(request, response);
         break;
       default:

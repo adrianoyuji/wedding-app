@@ -1,12 +1,15 @@
 import bcrypt from "bcrypt";
 import { connectToDatabase } from "../../../utils/mongodb";
 import User from "../../../models/User";
+import { validateToken } from "../../../utils/jwt";
+
 const handler = async (request, response) => {
   const { method } = request;
 
   try {
     switch (method) {
       case "POST":
+        await validateToken(request);
         await createUser(request, response);
         break;
       default:

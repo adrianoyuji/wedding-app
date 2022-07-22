@@ -2,6 +2,7 @@ import Gift from "../../../models/Gift";
 import { connectToDatabase } from "../../../utils/mongodb";
 import createGiftSchema from "../../../schemas/GiftSchema";
 import { validateToken } from "../../../utils/jwt";
+
 const handler = async (request, response) => {
   const { method } = request;
   try {

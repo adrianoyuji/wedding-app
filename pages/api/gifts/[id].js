@@ -1,5 +1,7 @@
 import { ObjectId } from "mongodb";
 import { connectToDatabase } from "../../../utils/mongodb";
+import { validateToken } from "../../../utils/jwt";
+
 const handler = async (request, response) => {
   const { method } = request;
   try {
@@ -8,9 +10,11 @@ const handler = async (request, response) => {
         await getGift(request, response);
         break;
       case "DELETE":
+        await validateToken(request);
         await deleteGift(request, response);
         break;
       case "PUT":
+        await validateToken(request);
         await updateGift(request, response);
         break;
       default:
