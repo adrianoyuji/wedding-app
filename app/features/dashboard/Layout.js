@@ -1,11 +1,11 @@
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Container, useDisclosure } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import Header from "./Header";
-import { useDisclosure } from "@chakra-ui/react";
-import Drawer from "./Drawer";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../store/User/slice";
-import { useRouter } from "next/router";
+import HeadTag from "../../components/HeadTag";
+import Drawer from "./Drawer";
+import Header from "./Header";
 
 const Layout = ({ children }) => {
   const user = useSelector(selectUser);
@@ -18,6 +18,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <HeadTag />
       <Header onOpenDrawer={onOpen} />
       <Box p="4">
         <Container
