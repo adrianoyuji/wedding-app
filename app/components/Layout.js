@@ -1,11 +1,12 @@
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Container, useDisclosure } from "@chakra-ui/react";
 import Header from "./Header";
 import React from "react";
-
+import NavigatorDrawer from "./NavigatorDrawer";
 const Layout = ({ children, direction }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box bgColor={"background"} minH="100vh" height="auto">
-      <Header />
+      <Header onOpenNavDrawer={onOpen} />
       <Container
         paddingInlineStart="0"
         paddingInlineEnd="0"
@@ -15,6 +16,7 @@ const Layout = ({ children, direction }) => {
       >
         {children}
       </Container>
+      <NavigatorDrawer isOpen={isOpen} onClose={onClose} />
     </Box>
   );
 };

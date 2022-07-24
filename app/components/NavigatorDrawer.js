@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import Link from "next/link";
-import routes from "./routes.json";
+import routes from "../common/navigation.json";
 
 const DBDrawer = ({ isOpen, onClose }) => {
   return (
