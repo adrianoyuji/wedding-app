@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { connectToDatabase } from "../../../utils/mongodb";
-import { ObjectId } from "mongodb";
 
 const handler = async (request, response) => {
   const { method } = request;
@@ -28,13 +27,13 @@ export default handler;
 
 const login = async (request, response) => {
   const { db } = await connectToDatabase();
-  const { email, password } = request.body;
+  const { username, password } = request.body;
 
-  if (!email || !password) {
+  if (!username || !password) {
     throw new Object({ statusCode: 400, message: "Insira email e/ou senha" });
   }
 
-  const user = await db.collection("users").findOne({ email });
+  const user = await db.collection("users").findOne({ name: username });
 
   if (!user) {
     throw new Object({ statusCode: 400, message: "Email ou senha inválidos" });
