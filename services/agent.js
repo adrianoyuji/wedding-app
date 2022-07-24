@@ -34,6 +34,7 @@ const requests = {
   get: (url) => axios.get(url).then(responseBody),
   post: (url, body) => axios.post(url, body).then(responseBody),
   put: (url, body) => axios.put(url, body).then(responseBody),
+  patch: (url, body) => axios.patch(url, body).then(responseBody),
   delete: (url) => axios.delete(url).then(responseBody),
 };
 
@@ -50,6 +51,10 @@ const Families = {
   delete: (id) => requests.delete(`families/${id}`),
   update: (updatedFamily) =>
     requests.put(`/families/${updatedFamily.id}`, updatedFamily),
+  createMember: (familyId, member) =>
+    requests.post(`/families/${familyId}/members`, { member }),
+  destroyMember: (familyId, memberId) =>
+    requests.delete(`/families/${familyId}/members/${memberId}`),
 };
 
 const User = {

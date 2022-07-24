@@ -21,7 +21,7 @@ const Login = () => {
 
   useEffect(() => {
     if (auth.authenticated) {
-      router.push("/dashboard");
+      router.push("/dashboard/familias");
     }
   }, [auth]);
 

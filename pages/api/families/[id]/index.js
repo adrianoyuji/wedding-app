@@ -1,7 +1,6 @@
 import { ObjectId } from "mongodb";
-import { connectToDatabase } from "../../../utils/mongodb";
-import { validateToken } from "../../../utils/jwt";
-
+import { validateToken } from "../../../../utils/jwt";
+import { connectToDatabase } from "../../../../utils/mongodb";
 const handler = async (request, response) => {
   const { method } = request;
   try {
@@ -17,6 +16,7 @@ const handler = async (request, response) => {
         await validateToken(request);
         await updateFamily(request, response);
         break;
+
       default:
         response
           .status(400)
@@ -52,16 +52,17 @@ const updateFamily = async (request, response) => {
   try {
     const { db } = await connectToDatabase();
     const updates = request.body;
-    const updatedGift = await db
+    const updatedFamily = await db
       .collection("families")
       .findOneAndUpdate(
         { _id: ObjectId(id) },
         { $set: { ...updates } },
         { new: true }
       );
-    response
-      .status(201)
-      .json({ statusCode: 201, family: { ...updatedGift.value, ...updates } });
+    response.status(201).json({
+      statusCode: 201,
+      family: { ...updatedFamily.value, ...updates },
+    });
   } catch (error) {
     throw new Object({ statusCode: 404, message: "Family not found" });
   }
@@ -72,9 +73,7 @@ const deleteFamily = async (request, response) => {
   try {
     const { db } = await connectToDatabase();
     await db.collection("families").deleteOne({ _id: ObjectId(id) });
-    response
-      .status(204)
-      .json({ statusCode: 204, message: "Succesfully deleted" });
+    response.status(204).end();
   } catch (error) {
     throw new Object({ statusCode: 404, message: "Family not found" });
   }

@@ -1,7 +1,11 @@
-import React from "react";
+import Layout from "../../app/features/dashboard/Layout";
 
-const index = () => {
-  return <div>index</div>;
+const Dashboard = () => {
+  return (
+    <Layout>
+      <p>Clique em Menu e escolha a opção desejada</p>
+    </Layout>
+  );
 };
 
-export default index;
+export default Dashboard;
