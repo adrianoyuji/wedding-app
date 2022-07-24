@@ -1,4 +1,4 @@
 [
-  { "href": "dashboard/presentes", "label": "Presentes" },
-  { "href": "dashboard/familias", "label": "Famílias" }
+  { "href": "/dashboard/presentes", "label": "Presentes" },
+  { "href": "/dashboard/familias", "label": "Famílias" }
 ]
