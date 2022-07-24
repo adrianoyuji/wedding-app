@@ -36,7 +36,7 @@ const CardPresente = ({ gift }) => {
             <CloseIcon color="red" />
           )}
         </Text>
-        <Button my="4" colorScheme={"yellow"}>
+        <Button disabled={gift.gifted} my="4" colorScheme={"yellow"}>
           Presentear
         </Button>
       </Flex>

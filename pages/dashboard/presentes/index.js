@@ -1,5 +1,11 @@
 import { AddIcon } from "@chakra-ui/icons";
-import { Flex, Heading, IconButton, useDisclosure } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  IconButton,
+  useDisclosure,
+  Spinner,
+} from "@chakra-ui/react";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../../app/features/dashboard/Layout";
@@ -33,6 +39,16 @@ const Gifts = () => {
     },
     [dispatch]
   );
+
+  if (gift.status !== "success") {
+    return (
+      <Layout>
+        <Flex justifyContent="center" alignItems="center">
+          <Spinner color="orange.500" />
+        </Flex>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

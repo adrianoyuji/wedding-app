@@ -20,28 +20,21 @@ import MemberList from "./MemberList";
 
 const FamilyModal = ({ isOpen, onClose, selectedFamily }) => {
   const [familyName, setFamilyName] = useState("");
-  const [confirmedAttendance, setConfirmedAttendance] = useState(false);
   const [members, setMembers] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (selectedFamily) {
       setFamilyName(selectedFamily.family_name);
-      setConfirmedAttendance(selectedFamily.confirmed_attendance);
       setMembers(selectedFamily.members);
     } else {
       setFamilyName("");
-      setConfirmedAttendance(false);
       setMembers([]);
     }
   }, [selectedFamily]);
 
   const handleChangeFamilyName = (e) => {
     setFamilyName(e.target.value);
-  };
-
-  const handleChangeConfirmedAttendance = (e) => {
-    setConfirmedAttendance(e.target.checked);
   };
 
   const handleCreateFamily = (e) => {
@@ -63,7 +56,6 @@ const FamilyModal = ({ isOpen, onClose, selectedFamily }) => {
     dispatch(
       updateFamily({
         id: selectedFamily.id,
-        confirmed_attendance: confirmedAttendance,
         family_name: familyName,
         members,
       })
@@ -96,20 +88,6 @@ const FamilyModal = ({ isOpen, onClose, selectedFamily }) => {
                 id="nome_familia"
               />
             </Box>
-
-            {selectedFamily && (
-              <Flex mt="1" direction="row" py="1" alignItems={"center"}>
-                <FormLabel fontWeight={"bold"} htmlFor="attendance" mb="0">
-                  Confirmado?
-                </FormLabel>
-                <Switch
-                  onChange={handleChangeConfirmedAttendance}
-                  size="md"
-                  isChecked={confirmedAttendance}
-                  id="attendance"
-                />
-              </Flex>
-            )}
 
             <Flex my="4" justifyContent={"flex-end"}>
               <Button onClick={onClose} colorScheme={"red"} type="button">

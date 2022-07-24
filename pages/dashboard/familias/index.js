@@ -1,8 +1,15 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useMemo } from "react";
 import Layout from "../../../app/features/dashboard/Layout";
 
 import { AddIcon } from "@chakra-ui/icons";
-import { Flex, Heading, IconButton, useDisclosure } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  IconButton,
+  useDisclosure,
+  Text,
+  Spinner,
+} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteFamily,
@@ -16,6 +23,15 @@ const Families = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedFamily, setSelectedFamily] = useState(null);
   const families = useSelector(selectFamilies);
+
+  const totalGuests = useMemo(
+    () =>
+      families.list.reduce((previousTotal, family) => {
+        return previousTotal + family.members.length;
+      }, 0),
+    [families]
+  );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -49,6 +65,16 @@ const Families = () => {
     [dispatch]
   );
 
+  if (families.status !== "success") {
+    return (
+      <Layout>
+        <Flex mt="4" justifyContent="center" alignItems="center">
+          <Spinner color="orange.500" />
+        </Flex>
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
       <Flex>
@@ -59,6 +85,12 @@ const Families = () => {
           aria-label="Nova família"
           icon={<AddIcon />}
         />
+      </Flex>
+      <Flex direction="row">
+        <Text as="p">Total de convidados:</Text>
+        <Text pl="2" as="b">
+          {totalGuests}
+        </Text>
       </Flex>
       <Flex my="8" direction="column">
         {families.list.map((family) => (
