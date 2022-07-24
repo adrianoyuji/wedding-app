@@ -47,6 +47,7 @@ const Gifts = {
 
 const Families = {
   listAll: () => requests.get("families"),
+  get: (familyId) => requests.get(`families/${familyId}`),
   create: (newFamily) => requests.post("families", newFamily),
   delete: (id) => requests.delete(`families/${id}`),
   update: (updatedFamily) =>
@@ -55,6 +56,8 @@ const Families = {
     requests.post(`/families/${familyId}/members`, { member }),
   destroyMember: (familyId, memberId) =>
     requests.delete(`/families/${familyId}/members/${memberId}`),
+  updateGuests: ({ members, familyId }) =>
+    requests.put(`/families/${familyId}/convidados`, { members }),
 };
 
 const User = {

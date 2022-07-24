@@ -95,8 +95,9 @@ export const Familieslice = createSlice({
         });
       })
       .addCase(createGuest.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.list = state.list.map((family) => {
-          if (family.id !== action.payload.family.id) return family;
+          if (family.id !== action.payload.family._id.toString()) return family;
 
           return {
             ...family,

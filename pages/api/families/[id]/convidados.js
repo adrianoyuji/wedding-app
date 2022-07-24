@@ -1,14 +1,11 @@
 import { ObjectId } from "mongodb";
-import { connectToDatabase } from "../../../../../utils/mongodb";
-import { validateToken } from "../../../../../utils/jwt";
-import { v4 as uuidv4 } from "uuid";
+import { connectToDatabase } from "../../../../utils/mongodb";
 const handler = async (request, response) => {
   const { method } = request;
   try {
     switch (method) {
-      case "POST":
-        await validateToken(request);
-        await createGuest(request, response);
+      case "PUT":
+        await confirmMembers(request, response);
         break;
       default:
         response
@@ -25,29 +22,19 @@ const handler = async (request, response) => {
 
 export default handler;
 
-const createGuest = async (request, response) => {
+const confirmMembers = async (request, response) => {
   const { id } = request.query;
   try {
     const { db } = await connectToDatabase();
-    const newMember = { ...request.body.member, id: uuidv4() };
-
-    const foundFamily = await db
-      .collection("families")
-      .findOne({ _id: ObjectId(id) });
-
-    const updatedMemberList = { members: [...foundFamily.members, newMember] };
-
-    const updatedFamily = await db
+    const members = [...request.body.members];
+    await db
       .collection("families")
       .findOneAndUpdate(
         { _id: ObjectId(id) },
-        { $set: { ...updatedMemberList } },
+        { $set: { members } },
         { new: true }
       );
-    response.status(201).json({
-      statusCode: 201,
-      family: { ...updatedFamily.value, ...updatedMemberList },
-    });
+    response.status(201).end();
   } catch (error) {
     throw new Object({ statusCode: 404, message: "Family not found" });
   }
