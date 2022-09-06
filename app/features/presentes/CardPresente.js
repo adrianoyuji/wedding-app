@@ -36,7 +36,14 @@ const CardPresente = ({ gift }) => {
             <CloseIcon color="red" />
           )}
         </Text>
-        <Button disabled={gift.gifted} my="4" colorScheme={"yellow"}>
+        <Button
+          as="a"
+          target="_blank"
+          href={`https://api.whatsapp.com/send?phone=556796548529&text=Oi! Quero presentear ${gift.name}`}
+          disabled={gift.gifted}
+          my="4"
+          colorScheme={"yellow"}
+        >
           Presentear
         </Button>
       </Flex>

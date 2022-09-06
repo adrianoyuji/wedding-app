@@ -41,7 +41,6 @@ const ConviteForm = ({ family, handleChangeStep }) => {
       <Text as="h2" fontSize={{ base: "2xl", md: "4xl" }}>
         {family?.family_name}
       </Text>
-      <Text as="h3">Texto de boas vindas</Text>
       <Text as="h4">Selecione as pessoas para confirmar o convite!</Text>
       <CheckboxGroup colorScheme={"orange"}>
         <Stack spacing={4} direction="column">
