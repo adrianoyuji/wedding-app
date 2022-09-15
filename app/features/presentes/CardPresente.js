@@ -3,7 +3,7 @@ import { Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import convertToReal from "../../../app/utils/convertToReal";
 import React from "react";
 
-const CardPresente = ({ gift }) => {
+const CardPresente = ({ gift, onOpen }) => {
   return (
     <Flex
       direction={"column"}
@@ -37,9 +37,10 @@ const CardPresente = ({ gift }) => {
           )}
         </Text>
         <Button
-          as="a"
-          target="_blank"
-          href={`https://api.whatsapp.com/send?phone=556796548529&text=Oi! Quero presentear ${gift.name}`}
+          //as="a"
+          //target="_blank"
+          //href={`https://api.whatsapp.com/send?phone=556796548529&text=Oi! Quero presentear ${gift.name}`}
+          onClick={onOpen}
           disabled={gift.gifted}
           my="4"
           colorScheme={"yellow"}

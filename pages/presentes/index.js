@@ -1,14 +1,16 @@
-import { Grid, Text, Spinner, Flex } from "@chakra-ui/react";
+import { Grid, Text, Spinner, Flex, useDisclosure } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchGifts, selectGifts } from "../../store/Gift/slice";
 import Layout from "../../app/components/Layout";
 import CardPresente from "../../app/features/presentes/CardPresente";
+import ModalPresente from "../../app/features/presentes/ModalPresente";
 import { useEffect } from "react";
 
 const Presentes = () => {
   const dispatch = useDispatch();
   const gifts = useSelector(selectGifts);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     dispatch(fetchGifts());
@@ -37,9 +39,10 @@ const Presentes = () => {
       </Text>
       <Grid templateColumns={{ base: "100%", md: "25% 25% 25% 25%" }} gap={4}>
         {gifts.list.map((gift) => (
-          <CardPresente key={gift.id} gift={gift} />
+          <CardPresente key={gift.id} gift={gift} onOpen={onOpen} />
         ))}
       </Grid>
+      <ModalPresente isOpen={isOpen} onClose={onClose} />
     </Layout>
   );
 };

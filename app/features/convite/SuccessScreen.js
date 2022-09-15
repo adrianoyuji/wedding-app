@@ -15,8 +15,13 @@ const SuccessScreen = () => {
       <Text as="h2">
         Tudo certo, nos vemos no dia 08 de outubro para celebrarmos!
       </Text>
-      <Link href="/informacoes" passHref style={{ marginTop: "16px" }}>
-        <Button as="a" colorScheme="orange">
+      <Link href="/presentes" passHref>
+        <Button as="a" colorScheme="orange" mt="4">
+          Lista de Presentes
+        </Button>
+      </Link>
+      <Link href="/informacoes" passHref>
+        <Button as="a" colorScheme="orange" mt="4">
           Saiba como chegar lá
         </Button>
       </Link>
