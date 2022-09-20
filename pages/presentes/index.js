@@ -6,6 +6,9 @@ import Layout from "../../app/components/Layout";
 import CardPresente from "../../app/features/presentes/CardPresente";
 import ModalPresente from "../../app/features/presentes/ModalPresente";
 import { useEffect } from "react";
+import PixCard from "../../app/features/presentes/PixCard";
+
+const PIX = {};
 
 const Presentes = () => {
   const dispatch = useDispatch();
@@ -38,6 +41,7 @@ const Presentes = () => {
         Lista de Presentes
       </Text>
       <Grid templateColumns={{ base: "100%", md: "25% 25% 25% 25%" }} gap={4}>
+        <PixCard onOpen={onOpen} />
         {gifts.list.map((gift) => (
           <CardPresente key={gift.id} gift={gift} onOpen={onOpen} />
         ))}

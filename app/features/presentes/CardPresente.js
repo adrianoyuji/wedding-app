@@ -13,12 +13,13 @@ const CardPresente = ({ gift, onOpen }) => {
       bgColor="white"
       flex="1"
     >
-      <Flex flex="1" maxH={181} minH={181}>
+      <Flex flex="1" maxH={181} minH={181} overflow="hidden">
         <Image
-          objectFit={"cover"}
+          objectFit={"contain"}
           borderRadius="4"
           src={gift.image_url}
           alt={gift.name}
+          loading="lazy"
         />
       </Flex>
       <Flex px="4" flex="3" direction={"column"}>
