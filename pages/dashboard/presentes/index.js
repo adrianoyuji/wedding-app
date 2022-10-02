@@ -61,7 +61,7 @@ const Gifts = () => {
           icon={<AddIcon />}
         />
       </Flex>
-      <Flex my="8" direction="column">
+      <Flex my="8" direction="column-reverse">
         {gift.list.map((gift) => (
           <Card
             handleDelete={handleDeleteGift}
