@@ -92,7 +92,7 @@ const Families = () => {
           {totalGuests}
         </Text>
       </Flex>
-      <Flex my="8" direction="column">
+      <Flex my="8" direction="column-reverse">
         {families.list.map((family) => (
           <Card
             key={family.id}
